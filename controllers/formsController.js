@@ -68,8 +68,11 @@ const login = async (req, res) => {
         }
 
         const generateToken = jwt.sign(payload, process.env.secretKey, { expiresIn: "1h" })
-        console.log(generateToken);
 
+        res.cookie("autherizationToken", generateToken, {
+            httpOnly: true,
+            secure: true
+        })
 
     } catch (error) {
         res.status(404).json({

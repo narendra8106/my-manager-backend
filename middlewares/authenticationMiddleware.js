@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const userAuthentication = async (req, res, next) => {
 
-    const authenticationHeader = req.headers.authorization
+    const authenticationHeader = req.cookie.autherizationToken;
     try {
 
         if (!authenticationHeader) {
