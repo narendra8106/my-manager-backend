@@ -3,6 +3,7 @@ const router = require("./routes/formsRoute")
 const mongoDB = require("./config/dataBase")
 const dotEnv = require("dotenv")
 const cookieParser = require("cookie-parser")
+const cors = require("cors")
 
 
 
@@ -15,6 +16,10 @@ const port = process.env.port;
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cookieParser())
+app.use(cors({
+    origin: "https://my-manager-livid.vercel.app",
+    credentials: true
+}))
 
 
 app.use((req, res, next) => {
