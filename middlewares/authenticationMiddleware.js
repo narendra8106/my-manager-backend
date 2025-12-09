@@ -4,14 +4,12 @@ require("dotenv").config();
 
 const userAuthentication = async (req, res, next) => {
 
-    const authenticationHeader = req.cookie.autherizationToken;
     try {
+        const authenticationHeader = req.cookies.autherizationToken;
 
         if (!authenticationHeader) {
             return res.status(401).json({ message: "Token missing" })
         }
-
-        const token = authenticationHeader.split(" ")[1]
 
 
         const verifyToken = jwt.verify(token, process.env.secretKey)
@@ -20,7 +18,7 @@ const userAuthentication = async (req, res, next) => {
             return res.status(401).json("invalid token")
         }
         req.user = verifyToken;
-        console.log(req.user);
+
 
         next()
     }

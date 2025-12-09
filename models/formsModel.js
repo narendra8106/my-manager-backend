@@ -29,13 +29,6 @@ const registerSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minLength: 8
-    },
-    confirmPassword: {
-        type: String,
-        required: true,
-        trim: true,
-        minLength: 8
-
     }
 })
 const registerModel = new mongoose.model("registerFormData", registerSchema)

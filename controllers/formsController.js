@@ -7,20 +7,25 @@ dotEnv.config()
 const register = async (req, res) => {
     try {
         const { name, email, phone, password, confirmPassword } = req.body;
-        const findEmail = await registerModel.findOne({ email })
-        const hashedPassword = await bcrypt.hash(password, 15)
-        const hashedConfirmPassword = await bcrypt.hash(confirmPassword, 15)
-        if (findEmail) {
-            return res.status(202).json("email already exist")
-        }
-        const registerData = await registerModel({ name, email, phone, password: hashedPassword, confirmPassword: hashedConfirmPassword })
-
 
         if (!(password === confirmPassword)) {
             return res.status(400).json({
                 message: "both passwords are different.enter same passwords"
             })
         }
+
+        const findEmail = await registerModel.findOne({ email })
+
+        if (findEmail) {
+            return res.status(202).json("email already exist")
+        }
+        const findPhone = await registerModel.findOne({ phone });
+        if (findPhone) {
+            return res.status(400).json({ message: "Phone number already exists" });
+        }
+        const hashedPassword = await bcrypt.hash(password, 15)
+        const registerData = await registerModel({ name, email, phone, password: hashedPassword })
+
         const savedRegisterData = await registerData.save()
         res.status(200).json({
             message: "register successfully",
@@ -55,11 +60,7 @@ const login = async (req, res) => {
             })
         }
 
-        res.status(200).json({
-            message: "login successfully",
-            token: generateToken,
-            userDetails: registredUser
-        })
+
 
         //payload
         const payload = {
@@ -72,6 +73,11 @@ const login = async (req, res) => {
         res.cookie("autherizationToken", generateToken, {
             httpOnly: true,
             secure: true
+        })
+        return res.status(200).json({
+            message: "login successfully",
+            token: generateToken,
+            userDetails: registredUser
         })
 
     } catch (error) {
