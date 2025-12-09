@@ -10,16 +10,18 @@ const cors = require("cors")
 dotEnv.config()
 
 const app = express()
+app.set("trust proxy", 1);
+
 const port = process.env.port;
-
-
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(cookieParser())
 app.use(cors({
     origin: "https://my-manager-livid.vercel.app",
     credentials: true
 }))
+
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(cookieParser())
+
 
 
 app.use((req, res, next) => {
