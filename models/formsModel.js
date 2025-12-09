@@ -16,12 +16,12 @@ const registerSchema = new mongoose.Schema({
         unique: true,
     },
     phone: {
-        type: Number,
+        type: String,
         unique: true,
-        minLength: 10,
-        maxLength: 10,
         required: true,
         trim: true,
+        minlength: 10,
+        maxlength: 10
 
     },
     password: {
