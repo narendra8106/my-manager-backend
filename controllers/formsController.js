@@ -8,7 +8,7 @@ const register = async (req, res) => {
     try {
         const { name, email, phone, password, confirmPassword } = req.body;
 
-        if (!(password === confirmPassword)) {
+        if (password !== confirmPassword) {
             return res.status(400).json({
                 message: "both passwords are different.enter same passwords"
             })
