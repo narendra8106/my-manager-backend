@@ -12,7 +12,7 @@ const userAuthentication = async (req, res, next) => {
         }
 
 
-        const verifyToken = jwt.verify(token, process.env.secretKey)
+        const verifyToken = jwt.verify(authenticationHeader, process.env.secretKey)
 
         if (!verifyToken) {
             return res.status(401).json("invalid token")
