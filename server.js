@@ -1,6 +1,6 @@
 const express = require("express")
 const router = require("./routes/formsRoute")
-const mongoDB = require("./config/dataBase")
+require("./config/dataBase")
 const dotEnv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")

@@ -11,7 +11,7 @@ router.post("/login", login)
 
 router.post("/contact", userAuthentication, contact)
 
-router.get("/getContactData/", userAuthentication, getContactData)
+router.get("/getContactData", userAuthentication, getContactData)
 
 
 module.exports = router

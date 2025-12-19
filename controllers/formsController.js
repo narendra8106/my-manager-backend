@@ -10,7 +10,7 @@ const register = async (req, res) => {
 
         if (password !== confirmPassword) {
             return res.status(400).json({
-                message: "both passwords are different.enter same passwords"
+                message: "password and confirm password are not same"
             })
         }
 
@@ -21,7 +21,7 @@ const register = async (req, res) => {
         }
         const findPhone = await registerModel.findOne({ phone });
         if (findPhone) {
-            return res.status(400).json({ message: "Phone number already exists" });
+            return res.status(400).json({ message: "Phone number already registred" });
         }
         const hashedPassword = await bcrypt.hash(password, 15)
         const registerData = await registerModel({ name, email, phone, password: hashedPassword })
