@@ -8,6 +8,6 @@ module.exports = mongoose.connect(process.env.dBURL, { dbName: "my_manager_forms
 }).catch((error) => {
     console.log({
         message: "error while connecting to the database",
-        error: error.message
+        error: error
     });
 });

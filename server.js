@@ -1,5 +1,8 @@
 const express = require("express")
-const router = require("./routes/formsRoute")
+const formRouter = require("./routes/formsRoute")
+const facultyRouter = require("./routes/facultyInfoRoute")
+const studentRouter = require("./routes/studentInfoRoute")
+
 require("./config/dataBase")
 const dotEnv = require("dotenv")
 const cookieParser = require("cookie-parser")
@@ -29,7 +32,9 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use("/user", router)
+app.use("/user", formRouter)
+app.use("/ece", facultyRouter)
+app.use("/ece", studentRouter)
 
 
 app.use((req, res) => {
