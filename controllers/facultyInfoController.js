@@ -50,6 +50,12 @@ const getAllFacultyInfo = async (req, res) => {
     try {
 
         const getAllFacultyInformation = await facultyInfoModel.find()
+        if (!getAllFacultyInformation) {
+            return res.status(400).json({
+                message: "error while fetching all data",
+                error: error.message
+            })
+        }
         return res.status(200).json({
             data: getAllFacultyInformation
         })

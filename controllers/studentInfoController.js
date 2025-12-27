@@ -46,6 +46,26 @@ const getStudentInfo = async (req, res) => {
         })
     }
 }
+const getAllStudentsInfo = async (req, res) => {
+    try {
+        const allData = await studentInfoModel.find()
+        if (!allData) {
+            return res.status(200).json({
+                message: "error while fetching all data",
+                error: error.message
+            })
+        }
+        return res.status(200).json({
+            message: "all students data",
+            data: allData
+        })
+    } catch (error) {
+        return res.status(404).json({
+            message: "failed to fetch all students data",
+            error: error.message
+        })
+    }
+}
 const updateStudentInfo = async (req, res) => {
     try {
         const { name, registerNumber, department, section, email, phone, photo, academicYear, admissionType, status } = req.body;
@@ -93,4 +113,4 @@ const deleteStudentInfo = async (req, res) => {
 
     }
 }
-module.exports = { studentInfo, getStudentInfo, updateStudentInfo, deleteStudentInfo }
+module.exports = { studentInfo, getStudentInfo, getAllStudentsInfo, updateStudentInfo, deleteStudentInfo }

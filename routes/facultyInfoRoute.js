@@ -4,7 +4,7 @@ const { facultyInfo, getFacultyInfo, updateFacultyInfo, deleteFaculty, getAllFac
 
 router.post("/facultyInfo", facultyInfo)
 router.get("/facultyInfo/:id", getFacultyInfo)
-router.get("/allFacultyData", getAllFacultyInfo)
+router.get("/allFacultyInfo", getAllFacultyInfo)
 router.put("/facultyInfo/:id", updateFacultyInfo)
 router.delete("/facultyInfo/:id", deleteFaculty)
 
