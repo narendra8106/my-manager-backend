@@ -46,6 +46,20 @@ const getFacultyInfo = async (req, res) => {
         })
     }
 }
+const getAllFacultyInfo = async (req, res) => {
+    try {
+
+        const getAllFacultyInformation = await facultyInfoModel.find()
+        return res.status(200).json({
+            data: getAllFacultyInformation
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message: "error while fetching all faculty data",
+            error: error.message
+        })
+    }
+}
 const updateFacultyInfo = async (req, res) => {
     try {
         const updateId = req.params.id;
@@ -92,4 +106,4 @@ const deleteFaculty = async (req, res) => {
         })
     }
 }
-module.exports = { facultyInfo, getFacultyInfo, updateFacultyInfo, deleteFaculty }
+module.exports = { facultyInfo, getFacultyInfo, getAllFacultyInfo, updateFacultyInfo, deleteFaculty }
