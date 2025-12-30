@@ -45,6 +45,7 @@ const studentInfoSchema = new mongoose.Schema({
     admissionType: {
         type: String,
         enum: ["Convener", "Management", "Lateral Entry"],
+        default: "Convener",
     },
 
     status: {
