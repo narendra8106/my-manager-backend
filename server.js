@@ -16,11 +16,11 @@ const app = express()
 app.set("trust proxy", 1);
 
 const port = process.env.port;
-app.use(cors())
-// {
-//     origin: "https://my-manager-livid.vercel.app",
-//     credentials: true
-// }
+app.use(cors({
+    origin: "https://my-manager-livid.vercel.app",
+    credentials: true
+}))
+
 
 
 app.use(express.json())

@@ -1,7 +1,7 @@
 const studentInfoModel = require("../models/studentInfoModel")
 const studentInfo = async (req, res) => {
     try {
-        const { name, registerNumber, department, section, email, phone, photo, academicYear, admissionType, status } = req.body;
+        const { name, registerNumber, department, section, email, phone, academicYear, admissionType, status } = req.body;
 
         if (!name || !registerNumber || !department || !section || !email || !phone || !photo || !academicYear || !admissionType || !status) {
             return res.status(400).json({
@@ -16,7 +16,7 @@ const studentInfo = async (req, res) => {
         if (existPhone) {
             return res.status(400).json({ message: "phone number already registred" })
         }
-        const studentInformation = await studentInfoModel({ name: req.file.name, registerNumber: req.file.registerNumber, department: req.file.department, section: req.file.section, email: req.file.email, phone: req.file.phone, photo: req.file.path, academicYear: req.file.academicYear, admissionType: req.file.admissionType, status: req.file.status })
+        const studentInformation = await studentInfoModel({ name, registerNumber, department, section, email, phone, photo: req.file.path, academicYear, admissionType, status })
 
         const saveStudentInformation = await studentInformation.save()
 
