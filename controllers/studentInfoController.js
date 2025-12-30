@@ -3,7 +3,7 @@ const studentInfo = async (req, res) => {
     try {
         const { name, registerNumber, department, section, email, phone, academicYear, admissionType, status } = req.body;
 
-        if (!name || !registerNumber || !department || !section || !email || !phone || !photo || !academicYear || !admissionType || !status) {
+        if (!name || !registerNumber || !department || !section || !email || !phone || !academicYear || !admissionType || !status) {
             return res.status(400).json({
                 message: "fill all the data fields"
             })
