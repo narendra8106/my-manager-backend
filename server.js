@@ -33,6 +33,9 @@ app.use((req, res, next) => {
     next()
 })
 
+app.get("/", (req, res) => {
+    res.json("Backend is running");
+});
 app.use("/user", formRouter)
 app.use("/ece", facultyRouter)
 app.use("/ece", studentRouter)
