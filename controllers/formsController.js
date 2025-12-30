@@ -17,7 +17,9 @@ const register = async (req, res) => {
         const findEmail = await registerModel.findOne({ email })
 
         if (findEmail) {
-            return res.status(202).json("email already exist")
+            return res.status(202).json({
+                message: "email already exist"
+            })
         }
         const findPhone = await registerModel.findOne({ phone });
         if (findPhone) {
@@ -65,6 +67,7 @@ const login = async (req, res) => {
         //payload
         const payload = {
             id: registredUser._id,
+            role: registredUser.role,
             name: registredUser.name
         }
 

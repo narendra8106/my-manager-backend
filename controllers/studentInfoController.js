@@ -16,7 +16,7 @@ const studentInfo = async (req, res) => {
         if (existPhone) {
             return res.status(400).json({ message: "phone number already registred" })
         }
-        const studentInformation = await studentInfoModel({ name, registerNumber, department, section, email, phone, photo, academicYear, admissionType, status })
+        const studentInformation = await studentInfoModel({ name, registerNumber, department, section, email, phone, photo: req.file.path, academicYear, admissionType, status })
 
         const saveStudentInformation = await studentInformation.save()
 

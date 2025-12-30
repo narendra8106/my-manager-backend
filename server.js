@@ -16,15 +16,16 @@ const app = express()
 app.set("trust proxy", 1);
 
 const port = process.env.port;
-app.use(cors({
-    origin: "https://my-manager-livid.vercel.app",
-    credentials: true
-}))
+app.use(cors())
+// {
+//     origin: "https://my-manager-livid.vercel.app",
+//     credentials: true
+// }
+
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
-
 
 
 app.use((req, res, next) => {
@@ -40,6 +41,7 @@ app.use("/ece", studentRouter)
 app.use((req, res) => {
     res.status(404).json("page not found")
 })
+
 if (!port) {
     console.log("server busy");
 }

@@ -21,7 +21,7 @@ const registerSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 10,
-        maxlength: 10
+        maxlength: 15
 
     },
     password: {

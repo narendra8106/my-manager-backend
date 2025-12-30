@@ -2,12 +2,18 @@ const facultyInfoModel = require("../models/facultyInfoModel");
 
 const facultyInfo = async (req, res) => {
     try {
-        const { name, designation, department, email, phone, photo, qualification, dateofjoining, status } = req.body;
 
-        if (!name && !designation && !department && !email && !phone && !photo && !qualification && !dateofjoining && !status) {
+
+
+        const { name, designation, department, email, phone, qualification, dateofjoining, status } = req.body;
+
+        if (!name || !designation || !department || !email || !phone || !qualification || !dateofjoining || !status) {
             return res.status(400).json({
                 message: "fill all the data fields "
             })
+        }
+        if (!req.file) {
+            return res.status(400).json({ message: "Photo is required" });
         }
         const existEmail = await facultyInfoModel.findOne({ email });
         if (existEmail) {
@@ -17,7 +23,7 @@ const facultyInfo = async (req, res) => {
         if (existPhone) {
             return res.status(400).json({ message: "phone number already registred" })
         }
-        const facultyInformation = await facultyInfoModel({ name, designation, department, email, phone, photo, qualification, dateofjoining, status })
+        const facultyInformation = await facultyInfoModel({ name, designation, department, email, phone, photo: req.file.path, qualification, dateofjoining, status })
 
         const savedFacultyInfo = await facultyInformation.save()
         return res.status(200).json({
@@ -25,8 +31,11 @@ const facultyInfo = async (req, res) => {
             data: savedFacultyInfo
         })
     } catch (error) {
+
+
+
         return res.status(400).json({
-            message: "error while adding pada",
+            message: "error while adding data",
             error: error.message
         })
     }
